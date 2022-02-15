@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ProfileSettingsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileSttingsRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back"
+            android:layout_marginStart="10dp"
+            app:tint="@color/siyah"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/AyarlarYazisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Ayarlar"
+            android:textColor="@color/siyah"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.056"
+            app:layout_constraintStart_toEndOf="@+id/ic_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/SttingsviewGolgelik"/>
+
+        <View
+            android:id="@+id/SttingsviewGolgelik"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/golgelik"
+            app:layout_constraintTop_toBottomOf="@id/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <TextView
+            android:id="@+id/HesapAyarlariYazisi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hesap Ayarları"
+            app:layout_constraintTop_toBottomOf="@id/SttingsviewGolgelik"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="22sp"
+            android:textColor="@color/siyah"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/id_SttingProfiliDuzenle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/HesapAyarlariYazisi"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Profili Düzenle"
+            android:textSize="18sp"
+            android:textColor="@color/siyah"
+            />
+        <TextView
+            android:id="@+id/id_BegendiginGonderiler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/id_SttingProfiliDuzenle"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Beğendiğin Gönderiler"
+            android:textSize="18sp"
+            android:textColor="@color/siyah"
+            />
+        <TextView
+            android:id="@+id/id_sifreniDegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/id_BegendiginGonderiler"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Şifreni Değiştir"
+            android:textSize="18sp"
+            android:textColor="@color/siyah"
+            />
+        <TextView
+            android:id="@+id/id_Kaydedilenler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/id_sifreniDegister"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Kaydedilenler"
+            android:textSize="18sp"
+            android:textColor="@color/siyah"
+            />
+        <TextView
+            android:id="@+id/id_gizliHesap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/id_Kaydedilenler"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Gizli Hesap"
+            android:textSize="18sp"
+            android:textColor="@color/siyah"
+            />
+        <TextView
+            android:id="@+id/id_arama_gecmisini_sil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/id_gizliHesap"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Arama Geçmişi Sil"
+            android:textSize="18sp"
+            android:textColor="@color/mavi"
+            />
+        <TextView
+            android:id="@+id/id_cikis_Yap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/id_arama_gecmisini_sil"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Çıkış Yap"
+            android:textSize="18sp"
+            android:textColor="@color/mavi"
+            />
+
+
+
+
+
+        <View
+            android:id="@+id/golgelikProfileSttings"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/golgelik"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottonNavigarionViewProfileSttinge"
+
+            />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottonNavigarionViewProfileSttinge"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_navigation_menu"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <FrameLayout
+        android:id="@+id/profileSttingsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
