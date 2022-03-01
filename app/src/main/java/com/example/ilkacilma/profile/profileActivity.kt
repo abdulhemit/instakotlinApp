@@ -8,6 +8,7 @@ import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.ActivityProfileBinding
 import com.example.ilkacilma.databinding.ActivitySrarchBinding
 import com.example.ilkacilma.utils.BottonNavigationViewHelper
+import com.example.ilkacilma.utils.UniversalImageLoader
 
 class profileActivity : AppCompatActivity() {
     private val ACTIVITY_NO = 4
@@ -19,6 +20,7 @@ class profileActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupNavigation()
         setupToolbar()
+        setupProfilePicture()
     }
 
     private fun setupToolbar() {
@@ -47,5 +49,19 @@ class profileActivity : AppCompatActivity() {
     override fun onBackPressed() {
         binding.ProfileActivitRoot.visibility = View.VISIBLE
         super.onBackPressed()
+    }
+
+    private fun setupProfilePicture() {
+
+        // internetten aldigimiz resmin adresi
+        //https://stickker.net/wp-content/uploads/2021/10/Squid-Game-Soldier-Circle.png
+
+        val imgURL ="stickker.net/wp-content/uploads/2021/10/Squid-Game-Soldier-Circle.png"
+        UniversalImageLoader.setImage(imgURL,binding.profileImage,binding.ProfileActivityProgressBar,"https://")
+
+
+
+
+
     }
 }
