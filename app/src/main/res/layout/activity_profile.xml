@@ -179,14 +179,17 @@
             android:text="Ekinler bas vermeden kor tuzagi topanlamaz"
             android:textSize="18dp"
             />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottonNavigationviewProfileActivity"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/bottom_navigation_menu"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_navigation_menu" />
+
         <View
             android:id="@+id/golgelik"
             android:layout_width="0dp"

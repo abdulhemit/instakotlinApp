@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/edit_profile_botton_backround.xml" value="0.2775" />
+        <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/register_button.xml" value="0.255" />
+        <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/register_button_aktif.xml" value="0.255" />
+        <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/register_edit_text.xml" value="0.255" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/activity_profile_settings.xml" value="0.25" />
+        <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/fragment_camera.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/fragment_home.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/fragment_messages.xml" value="0.13272543059777103" />
