@@ -7,21 +7,28 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import com.example.ilkacilma.Models.users
 import com.example.ilkacilma.R
-import com.example.ilkacilma.databinding.ActivityNewsBinding
 import com.example.ilkacilma.databinding.ActivityRegisterBinding
 import com.example.ilkacilma.utils.EvenstBusDataEvents
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import org.greenrobot.eventbus.EventBus
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRegisterBinding
+    lateinit var mDB : FirebaseFirestore
+    lateinit var mAuth : FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        mDB = FirebaseFirestore.getInstance()
+        mAuth = FirebaseAuth.getInstance()
         init()
 
     }
@@ -102,13 +109,47 @@ class RegisterActivity : AppCompatActivity() {
 
 
                 if (isValidEmail(binding.editTelefon.text.toString())){
-                    binding.loginRoot.visibility = View.GONE
-                    binding.loginContainer.visibility = View.VISIBLE
-                    val transaction = supportFragmentManager.beginTransaction()
-                    transaction.replace(R.id.loginContainer,KayitislemleriFragment())
-                    transaction.addToBackStack("KayitislemleriFragmentiEklendi")
-                    transaction.commit()
-                    EventBus.getDefault().postSticky(EvenstBusDataEvents.KayitBilgileriniGonder(null,binding.editTelefon.text.toString(),null,null,true))
+
+                    var EmailKullanimdaMi = false
+
+                    // firebase den verileri yani email verisini aldim
+                     mDB.collection("kullanicilar").get().addOnCompleteListener(object :OnCompleteListener<QuerySnapshot>{
+                        override fun onComplete(p0: Task<QuerySnapshot>) {
+                            if (p0.isSuccessful){
+                                for (data in p0.result){
+
+                                    // Email kullanimdami yoksa yeni bir Email mi kontrol ettim
+
+                                var list=(users(data.get("email") as String,null,null,null,null))
+                                    if(list.email!!.equals(binding.editTelefon.text.toString())){
+                                        Toast.makeText(this@RegisterActivity,"Bu Email Kullanımda",Toast.LENGTH_LONG).show()
+                                        EmailKullanimdaMi = true
+                                        break
+                                    }
+
+                                }
+                                if (EmailKullanimdaMi == false){
+
+                                    // yeni Email ise kayt olmak icin Fragmnet degistirdim
+                                    binding.loginRoot.visibility = View.GONE
+                                    binding.loginContainer.visibility = View.VISIBLE
+                                    val transaction = supportFragmentManager.beginTransaction()
+                                    transaction.replace(R.id.loginContainer,KayitislemleriFragment())
+                                    transaction.addToBackStack("KayitislemleriFragmentiEklendi")
+                                    transaction.commit()
+                                    EventBus.getDefault().postSticky(EvenstBusDataEvents
+                                        .KayitBilgileriniGonder(null,binding.editTelefon.text.toString(),null,null,true))
+
+                                }
+                            }
+                        }
+
+                    })
+
+
+
+
+
                 }
                 else {
                     //Snackbar.make(it,"Lütfen geçerli bir Email giriniz !!",Snackbar.LENGTH_LONG).show()

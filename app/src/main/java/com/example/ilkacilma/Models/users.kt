@@ -8,7 +8,7 @@ class users {
     var user_Name : String? = null
     var email : String? = null
 
-    constructor(email:String,pasword:String,user_Name:String,AdSoyad:String,user_id : String){
+    constructor(email:String?, pasword:String?, user_Name:String?, AdSoyad: String?, user_id: String?){
         this.email = email
         this.pasword = pasword
         this.AdSoyad = AdSoyad

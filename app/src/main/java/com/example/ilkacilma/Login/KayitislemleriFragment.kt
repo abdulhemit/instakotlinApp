@@ -15,14 +15,15 @@ import com.example.ilkacilma.Models.users
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.FragmentKayitislemleriBinding
 import com.example.ilkacilma.utils.EvenstBusDataEvents
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.installations.remote.TokenResult
 
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import java.nio.file.FileSystemAlreadyExistsException
 
 
 class KayitislemleriFragment : Fragment() {
@@ -53,36 +54,63 @@ class KayitislemleriFragment : Fragment() {
 
 
         binding?.btnGiris?.setOnClickListener {
-            // kullanici Email ile kayt olmak istiyor
-            if (EmailIleKaytIslemi){
 
-                mAuth.createUserWithEmailAndPassword(gelenEmail,binding?.sifre?.text.toString())
-                    .addOnCompleteListener {
-                        if (it.isSuccessful){
-                            //Toast.makeText(requireContext(),"oturum acildi",Toast.LENGTH_LONG).show()
-                            val sifre = binding?.sifre?.text.toString()
-                            val user_name = binding?.nickName?.text.toString()
-                            val ad_soyad = binding?.adinEndsoyadin?.text.toString()
-                            val userId = mAuth.currentUser?.uid.toString()
-                            val kaydedilecekKullanici = users(gelenEmail,sifre,user_name,ad_soyad,userId)
 
-                            mDB.collection("kullanicilar")
-                                .add(kaydedilecekKullanici)
-                                .addOnSuccessListener { decumentRefersns->
-                                if (decumentRefersns != null){
-                                    Toast.makeText(requireContext(),"kullanici kaydedildi",Toast.LENGTH_LONG).show()
-                                }
-                                else {
-                                    mAuth.currentUser!!.delete()
-                                }
+          var  userNameKUllanimdaMI = false
+
+            mDB.collection("kullanicilar").get().addOnCompleteListener(object :OnCompleteListener<QuerySnapshot>{
+                override fun onComplete(p0: Task<QuerySnapshot>) {
+                    if (p0.isSuccessful){
+                        for (documen in p0.result){
+                            val list = users(null,null,documen.get("user_Name") as String,null,null)
+                            if (list.user_Name!!.equals(binding?.nickName?.text.toString())){
+                                Toast.makeText(requireContext(),"Bu kullanıcı adı Kullanımda",Toast.LENGTH_LONG).show()
+                                userNameKUllanimdaMI = true
+                                break
                             }
                         }
-                    }
-            }
-            // Kullanici telfon No ile kayt olmak istiyor
-            else{
+                        if (userNameKUllanimdaMI==false){
 
-            }
+                            // kullanici Email ile kayt olmak istiyor
+                            if (EmailIleKaytIslemi){
+
+                                mAuth.createUserWithEmailAndPassword(gelenEmail,binding?.sifre?.text.toString())
+                                    .addOnCompleteListener {
+                                        if (it.isSuccessful){
+                                            //Toast.makeText(requireContext(),"oturum acildi",Toast.LENGTH_LONG).show()
+                                            val sifre = binding?.sifre?.text.toString()
+                                            val user_name = binding?.nickName?.text.toString()
+                                            val ad_soyad = binding?.adinEndsoyadin?.text.toString()
+                                            val userId = mAuth.currentUser?.uid.toString()
+                                            val kaydedilecekKullanici = users(gelenEmail,sifre,user_name,ad_soyad,userId)
+
+                                            mDB.collection("kullanicilar")
+                                                .add(kaydedilecekKullanici)
+                                                .addOnSuccessListener { decumentRefersns->
+                                                    if (decumentRefersns != null){
+                                                        Toast.makeText(requireContext(),"kullanici kaydedildi",Toast.LENGTH_LONG).show()
+                                                    }
+                                                    else {
+                                                        mAuth.currentUser!!.delete()
+                                                    }
+                                                }
+                                        }
+                                    }
+                            }
+                            // Kullanici telfon No ile kayt olmak istiyor
+                            // telefon ile kayt islemleri yapilacaktir
+                            else
+                            {
+
+                            }
+
+                        }
+
+                    }
+                }
+
+            })
+
         }
 
 
