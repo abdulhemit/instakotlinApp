@@ -1,6 +1,7 @@
 package com.example.ilkacilma.Login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -54,8 +55,6 @@ class KayitislemleriFragment : Fragment() {
 
 
         binding?.btnGiris?.setOnClickListener {
-
-
           var  userNameKUllanimdaMI = false
 
             mDB.collection("kullanicilar").get().addOnCompleteListener(object :OnCompleteListener<QuerySnapshot>{
@@ -111,6 +110,11 @@ class KayitislemleriFragment : Fragment() {
 
             })
 
+        }
+
+        binding?.kayitislemleriHesabinvarmiGiris?.setOnClickListener {
+            val intent = Intent(requireContext(),LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
         }
 
 

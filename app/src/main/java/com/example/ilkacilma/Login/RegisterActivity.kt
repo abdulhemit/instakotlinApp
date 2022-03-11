@@ -1,5 +1,6 @@
 package com.example.ilkacilma.Login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.widget.Toast
 import com.example.ilkacilma.Models.users
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.ActivityRegisterBinding
+import com.example.ilkacilma.home.MainActivity
 import com.example.ilkacilma.utils.EvenstBusDataEvents
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -23,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRegisterBinding
     lateinit var mDB : FirebaseFirestore
     lateinit var mAuth : FirebaseAuth
+    lateinit var mAutlistener : FirebaseAuth.AuthStateListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -30,6 +33,12 @@ class RegisterActivity : AppCompatActivity() {
         mDB = FirebaseFirestore.getInstance()
         mAuth = FirebaseAuth.getInstance()
         init()
+        setupmAuthListener()
+        binding.registerGirisYap.setOnClickListener {
+            val intent = Intent(this,LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+        }
 
     }
     private fun init(){
@@ -178,5 +187,33 @@ class RegisterActivity : AppCompatActivity() {
         binding.loginRoot.visibility = View.VISIBLE
         super.onBackPressed()
     }
+
+    private fun setupmAuthListener() {
+        mAutlistener = object : FirebaseAuth.AuthStateListener{
+            override fun onAuthStateChanged(p0: FirebaseAuth) {
+                val user = FirebaseAuth.getInstance().currentUser
+                if (user !=  null){
+                    val intent = Intent(this@RegisterActivity, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mAuth.addAuthStateListener(mAutlistener)
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mAutlistener != null){
+            mAuth.removeAuthStateListener(mAutlistener)
+        }
+    }
+
 
 }
