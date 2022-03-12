@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.ilkacilma.Models.userDetails
 import com.example.ilkacilma.Models.users
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.FragmentKayitislemleriBinding
@@ -61,8 +62,9 @@ class KayitislemleriFragment : Fragment() {
                 override fun onComplete(p0: Task<QuerySnapshot>) {
                     if (p0.isSuccessful){
                         for (documen in p0.result){
-                            val list = users(null,null,documen.get("user_Name") as String,null,null)
-                            if (list.user_Name!!.equals(binding?.nickName?.text.toString())){
+                            val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
+                            val list = users(null,null,documen.get("user_Name") as String,null,null,kaytedilecekKullaniciDetaylari)
+                            if (list.user_Name.equals(binding?.nickName?.text.toString())){
                                 Toast.makeText(requireContext(),"Bu kullanıcı adı Kullanımda",Toast.LENGTH_LONG).show()
                                 userNameKUllanimdaMI = true
                                 break
@@ -81,13 +83,14 @@ class KayitislemleriFragment : Fragment() {
                                             val user_name = binding?.nickName?.text.toString()
                                             val ad_soyad = binding?.adinEndsoyadin?.text.toString()
                                             val userId = mAuth.currentUser?.uid.toString()
-                                            val kaydedilecekKullanici = users(gelenEmail,sifre,user_name,ad_soyad,userId)
+                                            val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
+                                            val kaydedilecekKullanici = users(userId,sifre,user_name,ad_soyad,gelenEmail,kaytedilecekKullaniciDetaylari)
 
                                             mDB.collection("kullanicilar")
                                                 .add(kaydedilecekKullanici)
                                                 .addOnSuccessListener { decumentRefersns->
                                                     if (decumentRefersns != null){
-                                                        Toast.makeText(requireContext(),"kullanici kaydedildi",Toast.LENGTH_LONG).show()
+                                                        Toast.makeText(activity,"kullanici kaydedildi",Toast.LENGTH_LONG).show()
                                                     }
                                                     else {
                                                         mAuth.currentUser!!.delete()

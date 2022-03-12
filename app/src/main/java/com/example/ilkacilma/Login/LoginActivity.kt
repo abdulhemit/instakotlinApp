@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.ilkacilma.Models.userDetails
 import com.example.ilkacilma.Models.users
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.ActivityLoginBinding
@@ -52,7 +53,8 @@ class LoginActivity : AppCompatActivity() {
                 OnCompleteListener<QuerySnapshot> {
                 override fun onComplete(p0: Task<QuerySnapshot>) {
                     for (documens in p0.result){
-                        val list = users(documens.get("email") as String,documens.get("pasword") as String,documens.get("user_Name") as String,null,null)
+                        val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
+                        val list = users(documens.get("email") as String,documens.get("pasword") as String,documens.get("user_Name") as String,null,null,kaytedilecekKullaniciDetaylari)
                         val email = list.email
                         val sifre = binding.sifre.text.toString()
                         if (list.email!!.equals(binding.editTelEmailKullaniciAdi.text.toString())){
@@ -123,6 +125,7 @@ class LoginActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
                 if (user !=  null){
                     val intent = Intent(this@LoginActivity,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                     finish()
                 }

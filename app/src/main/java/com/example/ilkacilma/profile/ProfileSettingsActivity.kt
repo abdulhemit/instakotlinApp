@@ -30,11 +30,8 @@ class ProfileSettingsActivity : AppCompatActivity() {
         }
 
         binding.idCikisYap.setOnClickListener {
-            binding.profileSttingsRoot.visibility = View.GONE
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.profileSttingsContainer,SingOutFragment())
-            transaction.addToBackStack("SindOutFragmentEklendi")
-            transaction.commit()
+          val dialog = SingOutFragment()
+            dialog.show(supportFragmentManager,"cikis Yap Dialog Goster")
         }
     }
 
