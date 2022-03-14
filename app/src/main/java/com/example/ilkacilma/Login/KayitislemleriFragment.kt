@@ -12,8 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.ilkacilma.Models.Users
 import com.example.ilkacilma.Models.userDetails
-import com.example.ilkacilma.Models.users
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.FragmentKayitislemleriBinding
 import com.example.ilkacilma.utils.EvenstBusDataEvents
@@ -63,7 +63,7 @@ class KayitislemleriFragment : Fragment() {
                     if (p0.isSuccessful){
                         for (documen in p0.result){
                             val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
-                            val list = users(null,null,documen.get("user_Name") as String,null,null,kaytedilecekKullaniciDetaylari)
+                            val list = Users(null,null,documen.get("user_Name") as String,null,null,kaytedilecekKullaniciDetaylari)
                             if (list.user_Name.equals(binding?.nickName?.text.toString())){
                                 Toast.makeText(requireContext(),"Bu kullanıcı adı Kullanımda",Toast.LENGTH_LONG).show()
                                 userNameKUllanimdaMI = true
@@ -84,7 +84,8 @@ class KayitislemleriFragment : Fragment() {
                                             val ad_soyad = binding?.adinEndsoyadin?.text.toString()
                                             val userId = mAuth.currentUser?.uid.toString()
                                             val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
-                                            val kaydedilecekKullanici = users(userId,sifre,user_name,ad_soyad,gelenEmail,kaytedilecekKullaniciDetaylari)
+                                            val kaydedilecekKullanici = Users(userId,ad_soyad,sifre,user_name,gelenEmail,kaytedilecekKullaniciDetaylari)
+
 
                                             mDB.collection("kullanicilar")
                                                 .add(kaydedilecekKullanici)

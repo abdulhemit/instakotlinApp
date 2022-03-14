@@ -8,8 +8,8 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import com.example.ilkacilma.Models.Users
 import com.example.ilkacilma.Models.userDetails
-import com.example.ilkacilma.Models.users
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.ActivityRegisterBinding
 import com.example.ilkacilma.home.MainActivity
@@ -130,7 +130,7 @@ class RegisterActivity : AppCompatActivity() {
 
                                     // Email kullanimdami yoksa yeni bir Email mi kontrol ettim
                                  val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
-                                var list=(users(data.get("email") as String,null,null,null,null,kaytedilecekKullaniciDetaylari))
+                                var list=(Users(data.get("email") as String,null,null,null,null,kaytedilecekKullaniciDetaylari))
                                     if(list.email.equals(binding.editTelefon.text.toString())){
                                         Toast.makeText(this@RegisterActivity,"Bu Email Kullanımda",Toast.LENGTH_LONG).show()
                                         EmailKullanimdaMi = true

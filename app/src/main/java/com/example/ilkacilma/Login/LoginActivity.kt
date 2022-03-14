@@ -8,8 +8,8 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.ilkacilma.Models.Users
 import com.example.ilkacilma.Models.userDetails
-import com.example.ilkacilma.Models.users
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.ActivityLoginBinding
 import com.example.ilkacilma.home.MainActivity
@@ -54,14 +54,14 @@ class LoginActivity : AppCompatActivity() {
                 override fun onComplete(p0: Task<QuerySnapshot>) {
                     for (documens in p0.result){
                         val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
-                        val list = users(documens.get("email") as String,documens.get("pasword") as String,documens.get("user_Name") as String,null,null,kaytedilecekKullaniciDetaylari)
+                        val list = Users(null,null,documens.get("pasword") as String,documens.get("user_Name") as String,documens.get("email") as String,kaytedilecekKullaniciDetaylari)
                         val email = list.email
                         val sifre = binding.sifre.text.toString()
-                        if (list.email!!.equals(binding.editTelEmailKullaniciAdi.text.toString())){
+                        if (list.email.equals(binding.editTelEmailKullaniciAdi.text.toString())){
                             oturumAc(email,sifre)
                             kullaniciBulundu = true
                             break
-                        }else if (list.user_Name!!.equals(binding.editTelEmailKullaniciAdi.text.toString())){
+                        }else if (list.user_Name.equals(binding.editTelEmailKullaniciAdi.text.toString())){
                             oturumAc(email,sifre)
                             kullaniciBulundu = true
                             break

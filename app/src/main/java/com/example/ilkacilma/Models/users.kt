@@ -1,6 +1,6 @@
 package com.example.ilkacilma.Models
 
-class users {
+class Users {
 
     var user_id : String? = null
     var AdSoyad : String? = null
