@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.ilkacilma.Models.Users
-import com.example.ilkacilma.Models.userDetails
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.ActivityLoginBinding
 import com.example.ilkacilma.home.MainActivity
@@ -48,38 +46,37 @@ class LoginActivity : AppCompatActivity() {
         binding.sifre.addTextChangedListener(wtcher)
 
         binding.btnGirisYap.setOnClickListener {
-            var kullaniciBulundu = false
-            mDB.collection("kullanicilar").get().addOnCompleteListener(object :
-                OnCompleteListener<QuerySnapshot> {
-                override fun onComplete(p0: Task<QuerySnapshot>) {
-                    for (documens in p0.result){
-                        val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
-                        val list = Users(null,null,documens.get("pasword") as String,documens.get("user_Name") as String,documens.get("email") as String,kaytedilecekKullaniciDetaylari)
-                        val email = list.email
-                        val sifre = binding.sifre.text.toString()
-                        if (list.email.equals(binding.editTelEmailKullaniciAdi.text.toString())){
-                            oturumAc(email,sifre)
-                            kullaniciBulundu = true
-                            break
-                        }else if (list.user_Name.equals(binding.editTelEmailKullaniciAdi.text.toString())){
-                            oturumAc(email,sifre)
-                            kullaniciBulundu = true
-                            break
-                        }
-                    }
-                    if (kullaniciBulundu == false){
-
-                        Toast.makeText(this@LoginActivity,"Kullanıcı bulunamadı",Toast.LENGTH_LONG).show()
-                    }
-
-                }
-
-            })
-
+            oturumAcicakKUllaniciyiDenetle(binding.editTelEmailKullaniciAdi.text.toString(),binding.sifre.text.toString())
         }
+
+
+
     }
 
-    private fun oturumAc(email: String?, sifre: String) {
+    private fun oturumAcicakKUllaniciyiDenetle(editTelEmailKullaniciAdi: String, sifre: String) {
+
+        mDB.collection("kullanicilar").orderBy("email").get().addOnCompleteListener(object :OnCompleteListener<QuerySnapshot>{
+            override fun onComplete(p0: Task<QuerySnapshot>) {
+                for (ds in p0.result){
+                    var okunanKullanici = ds.toObject(Users::class.java)
+                    if (okunanKullanici.email.toString().equals(editTelEmailKullaniciAdi)){
+                        acOturum(okunanKullanici,sifre)
+                        break
+                    }else if (okunanKullanici.user_Name.toString().equals(editTelEmailKullaniciAdi)){
+                        acOturum(okunanKullanici,sifre)
+                        break
+                    }
+                }
+            }
+
+
+        })
+
+    }
+
+    private fun acOturum(okunanKullanici: Users, sifre: String) {
+
+        val email = okunanKullanici.email
 
         mAuth.signInWithEmailAndPassword(email!!,sifre).addOnCompleteListener{
             if (it.isSuccessful){
@@ -89,6 +86,9 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
 
 
     private val wtcher : TextWatcher = object : TextWatcher{

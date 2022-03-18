@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/edit_profile_botton_backround.xml" value="0.2775" />
+        <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/ic_person_add_24.xml" value="0.124" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/register_button.xml" value="0.255" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/register_button_aktif.xml" value="0.255" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/drawable/register_edit_text.xml" value="0.255" />
@@ -17,6 +18,7 @@
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/fragment_kayitislemleri.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/fragment_messages.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/fragment_profile_edit.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/fragment_sing_out.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/layout/fragment_telegon_kodu_gir.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ibrahim/AndroidStudioProjects/ilkAcilma/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.19166666666666668" />
       </map>

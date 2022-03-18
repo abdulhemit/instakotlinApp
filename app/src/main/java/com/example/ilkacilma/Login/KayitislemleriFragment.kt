@@ -86,15 +86,14 @@ class KayitislemleriFragment : Fragment() {
                                             val kaytedilecekKullaniciDetaylari = userDetails("0","0","0","","","")
                                             val kaydedilecekKullanici = Users(userId,ad_soyad,sifre,user_name,gelenEmail,kaytedilecekKullaniciDetaylari)
 
-
-                                            mDB.collection("kullanicilar")
-                                                .add(kaydedilecekKullanici)
+                                            // database kullanici kimlik bilgilerini kaydettik
+                                            mDB.collection("kullanicilar").document(userId).set(kaydedilecekKullanici)
                                                 .addOnSuccessListener { decumentRefersns->
                                                     if (decumentRefersns != null){
                                                         Toast.makeText(activity,"kullanici kaydedildi",Toast.LENGTH_LONG).show()
                                                     }
                                                     else {
-                                                        mAuth.currentUser!!.delete()
+                                                        //mAuth.currentUser!!.delete()
                                                     }
                                                 }
                                         }

@@ -9,7 +9,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ProfileActivitRoot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvProfileAdToolbar"
@@ -27,12 +31,12 @@
             android:id="@+id/id_Sttings"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/siyah"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_sttings_vert_24"
+            app:tint="@color/siyah"
             tools:layout_editor_absoluteX="371dp"
             tools:layout_editor_absoluteY="16dp" />
 
@@ -40,12 +44,12 @@
             android:id="@+id/imageView2"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:tint="@color/siyah"
+            android:layout_marginEnd="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/id_Sttings"
             app:layout_constraintEnd_toStartOf="@+id/id_Sttings"
             app:layout_constraintTop_toTopOf="@id/id_Sttings"
-            android:layout_marginEnd="15dp"
-            app:srcCompat="@drawable/ic_person_add_24" />
+            app:srcCompat="@drawable/ic_person_add_24"
+            app:tint="@color/siyah" />
 
         <View
             android:id="@+id/view"
@@ -60,11 +64,11 @@
             android:id="@+id/profile_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="18dp"
             android:src="@drawable/ic_baseline_person_24"
             app:civ_border_color="@color/golgelik"
             app:civ_border_width="1dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -111,8 +115,8 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="gönderi"
             android:layout_marginTop="5dp"
+            android:text="gönderi"
             app:layout_constraintEnd_toEndOf="@+id/PostSayisi"
             app:layout_constraintStart_toStartOf="@+id/PostSayisi"
             app:layout_constraintTop_toBottomOf="@+id/PostSayisi" />
@@ -121,8 +125,8 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="takipçi"
             android:layout_marginTop="5dp"
+            android:text="takipçi"
             app:layout_constraintEnd_toEndOf="@+id/takipciSayisi"
             app:layout_constraintStart_toStartOf="@+id/takipciSayisi"
             app:layout_constraintTop_toBottomOf="@+id/takipciSayisi" />
@@ -142,14 +146,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/edit_profile_botton_backround"
             android:padding="4dp"
             android:text="profili Düzenle"
             android:textAlignment="center"
-            android:textSize="18dp"
             android:textColor="@color/siyah"
-            android:layout_marginTop="5dp"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@id/profile_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
@@ -159,14 +163,13 @@
             android:id="@+id/profile_gercek_ad"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="ibrahim hemit"
-            app:layout_constraintTop_toBottomOf="@id/profile_image"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="10dp"
-            android:textSize="25sp"
+            android:layout_marginTop="16dp"
+            android:text="ibrahim hemit"
             android:textColor="@color/siyah"
-            />
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
         <TextView
             android:id="@+id/byografi"
@@ -174,11 +177,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_gercek_ad"
             android:text="Ekinler bas vermeden kor tuzagi topanlamaz"
             android:textSize="18dp"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_gercek_ad" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottonNavigationviewProfileActivity"
@@ -195,9 +197,9 @@
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:background="@color/golgelik"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/bottonNavigationviewProfileActivity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
 
             />
 
@@ -216,18 +218,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/byografi"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@id/byografi"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="309dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@id/byografi" />
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/ProfileActivityContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible" />
+        tools:layout_editor_absoluteX="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

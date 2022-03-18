@@ -4,21 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.net.toUri
 import com.example.ilkacilma.Login.LoginActivity
 import com.example.ilkacilma.Models.Users
 import com.example.ilkacilma.R
 import com.example.ilkacilma.databinding.ActivityProfileBinding
-
 import com.example.ilkacilma.utils.BottonNavigationViewHelper
+import com.example.ilkacilma.utils.EvenstBusDataEvents
 import com.example.ilkacilma.utils.UniversalImageLoader
-import com.google.android.gms.tasks.OnCompleteListener
-
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
+import org.greenrobot.eventbus.EventBus
 
 
 class profileActivity : AppCompatActivity() {
@@ -29,9 +25,10 @@ class profileActivity : AppCompatActivity() {
     lateinit var mDB : FirebaseFirestore
     lateinit var mAutlistener : FirebaseAuth.AuthStateListener
     lateinit var mUser : FirebaseUser
-    lateinit var gelenler : List<Users>
+    //lateinit var gelenler : List<Users>
+    lateinit var gelenler : Users
 
-
+    //   https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIyvImE1OhLBcBGTzkNsoHUlVKzgFPdq--VQ&usqp=CAU
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -41,39 +38,44 @@ class profileActivity : AppCompatActivity() {
         mUser = mAuth.currentUser!!
         mDB = FirebaseFirestore.getInstance()
         setupNavigation()
-        setupToolbar()
         okunanKullaniciBilgileriniGetir()
-        //setupProfilePicture()
-
+        setupToolbar()
 
 
     }
 
     private fun okunanKullaniciBilgileriniGetir() {
-        mDB.collection("kullanicilar").get().addOnCompleteListener(object : OnCompleteListener<QuerySnapshot>{
-            override fun onComplete(p0: Task<QuerySnapshot>) {
-                gelenler = p0.result.toObjects(Users::class.java)
-                gelenler.forEach {
+        val m = mUser.uid
 
-                    binding.tvProfileAdToolbar.setText(it.user_Name.toString())
-                    binding.profileGercekAd.setText(it.AdSoyad.toString())
-                    binding.takipSayisi.setText(it.user_details?.following.toString())
-                    binding.takipciSayisi.setText(it.user_details?.follower.toString())
-                    binding.PostSayisi.setText(it.user_details?.post.toString())
 
-                    if(!it.user_details?.biography.isNullOrEmpty()){
-                        binding.byografi.setText(it.user_details?.biography.toString())
+        mDB.collection("kullanicilar").document(mUser.uid).addSnapshotListener { value, error ->
+            if (error != null ){
+
+            }else{
+                if(value != null){
+                    gelenler = value.toObject(Users::class.java)!!
+                    EventBus.getDefault().postSticky(EvenstBusDataEvents.kullaniciBilgileriniGonder(gelenler))
+                    binding.profileGercekAd.setText(gelenler.AdSoyad.toString())
+                    binding.tvProfileAdToolbar.setText(gelenler.user_Name.toString())
+                    binding.takipSayisi.setText(gelenler.user_details?.following.toString())
+                    binding.takipciSayisi.setText(gelenler.user_details?.follower.toString())
+                    binding.PostSayisi.setText(gelenler.user_details?.post.toString())
+
+                    if(!gelenler.user_details?.biography.isNullOrEmpty()){
+                        binding.byografi.setText(gelenler.user_details?.biography.toString())
                     }
-                    if (!it.user_details?.web_site.isNullOrEmpty()){
-                        binding.webSite.setText(it.user_details?.web_site.toString())
+                    if (!gelenler.user_details?.web_site.isNullOrEmpty()){
+                        binding.webSite.setText(gelenler.user_details?.web_site.toString())
                     }
+
                     val defultImage = R.drawable.ic_person_add_24
-                    val imgURL = it.user_details?.profile_pucture ?: "$defultImage"
+                    val imgURL = gelenler.user_details?.profile_pucture ?: "$defultImage"
                     UniversalImageLoader.setImage(imgURL,binding.profileImage,binding.ProfileActivityProgressBar,"")
 
                 }
             }
-        })
+        }
+
     }
 
     private fun setupToolbar() {
@@ -138,3 +140,4 @@ class profileActivity : AppCompatActivity() {
     }
 
 }
+
