@@ -47,6 +47,9 @@ class profileActivity : AppCompatActivity() {
     private fun okunanKullaniciBilgileriniGetir() {
         val m = mUser.uid
 
+        binding.prifiliDuzenle.isEnabled = false
+
+
 
         mDB.collection("kullanicilar").document(mUser.uid).addSnapshotListener { value, error ->
             if (error != null ){
@@ -55,6 +58,9 @@ class profileActivity : AppCompatActivity() {
                 if(value != null){
                     gelenler = value.toObject(Users::class.java)!!
                     EventBus.getDefault().postSticky(EvenstBusDataEvents.kullaniciBilgileriniGonder(gelenler))
+
+                     binding.prifiliDuzenle.isEnabled = true
+
                     binding.profileGercekAd.setText(gelenler.AdSoyad.toString())
                     binding.tvProfileAdToolbar.setText(gelenler.user_Name.toString())
                     binding.takipSayisi.setText(gelenler.user_details?.following.toString())
